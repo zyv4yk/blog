@@ -1,0 +1,59 @@
+{{ define "main" }}
+<aside class="progress-rail" aria-hidden="true" id="progressRail">
+  <div id="progressPct">00%</div>
+  <div class="progress-rail__bar"><div class="progress-rail__fill" id="progressFill"></div></div>
+  <div id="progressIdx">01/01</div>
+</aside>
+<article class="container post-shell">
+  <a href="{{ "posts/" | relURL }}" class="post-back">← back to registry</a>
+
+  <div class="post-meta-row">
+    <span class="cy">{{ .Title | truncate 1 "" }}</span>
+    <span class="sep">|</span>
+    <span>{{ .Date.Format "2006 · 01 · 02" }}</span>
+    <span class="sep">|</span>
+    <span>{{ .ReadingTime }} min read</span>
+    <span class="sep">|</span>
+    <span>~{{ .WordCount }} words</span>
+  </div>
+
+  <h1 class="post-h1">{{ .Title }}</h1>
+  {{ with .Description }}<p class="post-lede">{{ . }}</p>{{ end }}
+  {{ with .Params.tags }}
+  <div class="post-tags">
+    {{- range . -}}<span class="tag tag--cy">{{ . }}</span>{{- end -}}
+  </div>
+  {{ end }}
+
+  <div class="post-body">
+    {{ .Content }}
+  </div>
+
+  <div class="post-end">
+    <span><span class="cy">end of file_</span> · {{ .Title | truncate 40 }}</span>
+    <span><a href="{{ "posts/" | relURL }}" class="cy">← registry</a></span>
+  </div>
+</article>
+<script>
+(function(){
+  var pct = document.getElementById('progressPct');
+  var fill = document.getElementById('progressFill');
+  var idx = document.getElementById('progressIdx');
+  var headings = document.querySelectorAll('.post-body h2');
+  if (!headings.length) { document.getElementById('progressRail').style.display = 'none'; return; }
+  idx.textContent = '01/' + String(headings.length).padStart(2,'0');
+  function update(){
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    var p = max > 0 ? (h.scrollTop / max) * 100 : 0;
+    pct.textContent = String(Math.round(p)).padStart(2,'0') + '%';
+    fill.style.height = p + '%';
+    var y = h.scrollTop + 200, ix = 0;
+    headings.forEach(function(el, i){ if (el.offsetTop <= y) ix = i; });
+    idx.textContent = String(ix+1).padStart(2,'0') + '/' + String(headings.length).padStart(2,'0');
+  }
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+})();
+</script>
+{{ end }}

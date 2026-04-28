@@ -1,0 +1,22 @@
+{{- /* head partial — fonts, css, early tweak hydration */ -}}
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{{ if .IsHome }}{{ .Site.Title }} — blcknb.tech{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
+<meta name="author" content="{{ .Site.Params.author }}" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="{{ "css/style.css" | relURL }}" />
+<script>
+  try {
+    var saved = JSON.parse(localStorage.getItem('nbTweaks') || 'null');
+    var def = { intensity: 'subtle', hue: 'cyan', motion: 'on' };
+    var t = Object.assign(def, saved || {});
+    document.documentElement.dataset.intensity = t.intensity;
+    document.documentElement.dataset.hue = t.hue;
+    document.documentElement.dataset.motion = t.motion;
+  } catch(e) {}
+</script>
+</head>

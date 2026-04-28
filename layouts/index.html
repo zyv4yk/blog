@@ -1,0 +1,96 @@
+{{ define "main" }}
+<section class="hero">
+  <div class="horizon" aria-hidden="true"></div>
+  <div class="container hero__inner">
+    <div class="hero__id fade">
+      <span><span class="dot"></span> {{ if .Site.Params.available }}available · open to talks{{ else }}heads-down · not on the market{{ end }}</span>
+      <span>{{ .Site.Params.location | lower }}</span>
+      <span>uid · nb-2025-staff</span>
+    </div>
+    <h1 class="hero__name fade d1">
+      {{ $parts := split (.Site.Params.author | lower) " " }}
+      {{ index $parts 0 }}<br/><span class="em">{{ index $parts 1 }}_</span>
+    </h1>
+    <div class="hero__role fade d2">{{ .Site.Params.role | lower }}</div>
+    <p class="hero__bio fade d3">
+      {{ with .Site.Params.description }}{{ . }}{{ else }}I build <strong>centralised CI/CD platforms</strong>, run helm &amp; istio in production, and write about the unglamorous craft of keeping deploys boring.{{ end }}
+    </p>
+    <div class="hero__cta fade d4">
+      <a href="{{ "posts/" | relURL }}" class="btn btn--cy">read the posts <span class="arr">→</span></a>
+      <a href="{{ "about/" | relURL }}" class="btn">open dossier</a>
+      <a href="{{ .Site.Params.github }}" target="_blank" rel="noreferrer" class="btn">github ↗</a>
+    </div>
+
+    <div class="idcard fade d5" role="group" aria-label="Identity card">
+      <div class="idcard__cell">
+        <div class="idcard__label">subject</div>
+        <div class="idcard__value">{{ $parts := split (.Site.Params.author | lower) " " }}{{ index $parts 0 }} <span class="cy">{{ index $parts 1 }}</span></div>
+      </div>
+      <div class="idcard__cell">
+        <div class="idcard__label">class</div>
+        <div class="idcard__value">staff · platform</div>
+      </div>
+      <div class="idcard__cell">
+        <div class="idcard__label">stack</div>
+        <div class="idcard__value">go · k8s · helm</div>
+      </div>
+      <div class="idcard__cell">
+        <div class="idcard__label">cycle</div>
+        <div class="idcard__value">8.0 yr / online</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="home-posts">
+  <div class="container">
+    <h2 class="section-title" data-id="03">latest dispatches</h2>
+    <div class="home-posts__list">
+      {{- $i := 0 -}}
+      {{- $posts := where .Site.RegularPages "Section" "posts" -}}
+      {{- $total := len $posts -}}
+      {{- range first 5 $posts }}
+      {{- $num := printf "%03d" (sub $total $i) -}}
+      <a href="{{ .RelPermalink }}" class="post-row">
+        <div class="post-row__num">{{ $num }}</div>
+        <div class="post-row__date">{{ .Date.Format "2006 · 01" }}</div>
+        <div class="post-row__title">
+          {{ .Title }}
+          {{ with .Description }}<small>{{ . }}</small>{{ end }}
+        </div>
+        <div class="post-row__tags">
+          {{- range first 2 .Params.tags -}}
+            <span class="tag tag--cy">{{ . }}</span>
+          {{- end -}}
+        </div>
+      </a>
+      {{- $i = add $i 1 -}}
+      {{- end }}
+    </div>
+  </div>
+</section>
+
+<section class="container">
+  <div class="dossier">
+    <div class="dossier__half">
+      <div class="dossier__label">// status.yaml</div>
+      <div class="dossier__rows">
+        <div class="dossier__row"><span class="k">focus</span><span class="v"><span class="cy">platform-engineering</span></span></div>
+        <div class="dossier__row"><span class="k">writing</span><span class="v">observability · supply-chain · dx</span></div>
+        <div class="dossier__row"><span class="k">speaking</span><span class="v">backend meetup · fwdays</span></div>
+        <div class="dossier__row"><span class="k">open_to</span><span class="v">talks · collab · coffee</span></div>
+        <div class="dossier__row"><span class="k">github</span><span class="v"><span class="cy">2,400+</span> contributions / yr</span></div>
+        <div class="dossier__row"><span class="k">reviews</span><span class="v">~48% of activity</span></div>
+      </div>
+    </div>
+    <div class="dossier__half">
+      <div class="dossier__label">// transmission</div>
+      <p class="dossier__quote">
+        Observability isn't a tool you install — <span class="em">it's a practice you build.</span>
+        See it. Trace it. Fix it.
+      </p>
+      <div class="dossier__credit">— from "Observability as Code", backend meetup '24</div>
+    </div>
+  </div>
+</section>
+{{ end }}

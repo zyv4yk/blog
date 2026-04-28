@@ -1,0 +1,44 @@
+{{- /* boot loader — first-visit only, session-scoped, css-only animation */ -}}
+<div id="boot" class="boot" role="status" aria-label="System boot">
+  <div class="boot__grid"></div>
+  <div class="boot__core">
+    <div class="boot__ring"></div>
+    <div class="boot__title">blcknb.tech</div>
+    <div class="boot__lines" id="bootLines"></div>
+    <div class="boot__bar"></div>
+  </div>
+  <button class="boot__skip" id="bootSkip">skip ⏎</button>
+</div>
+<script>
+(function(){
+  var boot = document.getElementById('boot');
+  var lines = document.getElementById('bootLines');
+  var skip = document.getElementById('bootSkip');
+  if (sessionStorage.getItem('nbBooted') === '1') { boot.classList.add('is-done'); return; }
+  try {
+    var saved = JSON.parse(localStorage.getItem('nbTweaks') || 'null');
+    if (saved && saved.boot === false) { boot.classList.add('is-done'); return; }
+  } catch(e){}
+  var SCRIPT = [
+    [80,  '<span class="ar">›</span> establishing link to grid…'],
+    [220, '<span class="ar">›</span> identity disc <span class="ok">[ok]</span>'],
+    [360, '<span class="ar">›</span> mounting /content/posts <span class="ok">[ok]</span>'],
+    [540, '<span class="ar">›</span> mounting /content/about <span class="ok">[ok]</span>'],
+    [720, '<span class="ar">›</span> handshake: blcknb.tech <span class="ok">[ok]</span>'],
+    [1000,'<span class="ar">›</span> rendering ui shell…'],
+    [1300,'<span class="ar">›</span> ready. <span class="ok">end of line.</span>']
+  ];
+  SCRIPT.forEach(function(s, i){
+    setTimeout(function(){
+      var d = document.createElement('div');
+      d.className = 'boot__line';
+      d.style.animationDelay = (i*30)+'ms';
+      d.innerHTML = s[1];
+      lines.appendChild(d);
+    }, s[0]);
+  });
+  function done(){ boot.classList.add('is-done'); sessionStorage.setItem('nbBooted','1'); }
+  setTimeout(done, 1700);
+  skip.addEventListener('click', done);
+})();
+</script>

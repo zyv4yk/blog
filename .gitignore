@@ -1,0 +1,17 @@
+# Hugo
+public/
+resources/_gen/
+.hugo_build.lock
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local planning artifacts (specs, plans) — kept out of git per user preference
+docs/

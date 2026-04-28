@@ -1,0 +1,40 @@
+baseURL = "https://blcknb.tech/"
+languageCode = "en"
+title = "Nikita Bolotov"
+
+[params]
+  description = "Staff Backend Engineer writing about Platform Engineering, CI/CD, Kubernetes, and Developer Experience."
+  author = "Nikita Bolotov"
+  role = "Staff Backend Engineer / Platform Engineer"
+  location = "Kyiv, Ukraine"
+  github = "https://github.com/zyv4yk"
+  linkedin = "https://www.linkedin.com/in/nikita-bolotov/"
+  available = false
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "dracula"
+    lineNos = false
+    noClasses = false
+
+[outputs]
+  home = ["HTML"]
+
+[menu]
+  [[menu.main]]
+    name = "Blog"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Dossier"
+    url = "/about/"
+    weight = 2
+  [[menu.main]]
+    name = "GitHub"
+    url = "https://github.com/zyv4yk"
+    weight = 3
+    [menu.main.params]
+      external = true

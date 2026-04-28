@@ -1,0 +1,15 @@
+{{- $cur := .RelPermalink -}}
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="{{ "/" | relURL }}" class="brand">
+      <span class="brand__mark" aria-hidden="true"></span>
+      blcknb.tech
+    </a>
+    <ul class="nav__links">
+      <li><a href="{{ "/" | relURL }}" class="nav__link"{{ if eq $cur "/" }} aria-current="page"{{ end }}>Index</a></li>
+      <li><a href="{{ "posts/" | relURL }}" class="nav__link"{{ if hasPrefix $cur "/posts" }} aria-current="page"{{ end }}>Posts</a></li>
+      <li><a href="{{ "about/" | relURL }}" class="nav__link"{{ if hasPrefix $cur "/about" }} aria-current="page"{{ end }}>Dossier</a></li>
+      <li><a href="{{ .Site.Params.github }}" target="_blank" rel="noreferrer" class="nav__link">GitHub ↗</a></li>
+    </ul>
+  </div>
+</nav>

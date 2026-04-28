@@ -1,0 +1,69 @@
+{{ define "main" }}
+{{- $posts := where .Site.RegularPages "Section" "posts" -}}
+{{- $tagCounts := dict -}}
+{{- range $posts -}}{{- range .Params.tags -}}
+  {{- $tagCounts = merge $tagCounts (dict . (add (default 0 (index $tagCounts .)) 1)) -}}
+{{- end -}}{{- end -}}
+<section class="container">
+  <div class="page-head">
+    <div class="page-head__id">// /content/posts &nbsp;·&nbsp; registry</div>
+    <h1 class="page-head__title">data <span class="em">registry_</span></h1>
+    <p class="page-head__sub">
+      Notes from the platform layer — CI/CD, observability, supply-chain security, and the long tail of running services no one wants to think about.
+    </p>
+  </div>
+
+  <div class="registry-meta">
+    <span>entries · <strong>{{ len $posts }}</strong></span>
+    <span>topics · <strong>{{ len $tagCounts }}</strong></span>
+    {{ with index (sort $posts "Date" "desc") 0 }}<span>last updated · <strong>{{ .Date.Format "2006.01.02" }}</strong></span>{{ end }}
+    <span>sort · <strong>chrono ↓</strong></span>
+  </div>
+
+  <div class="tag-bar" role="toolbar" aria-label="Filter by tag" id="tagBar">
+    <button class="tag-bar__btn" aria-pressed="true" data-tag="__all">all <small>·{{ printf "%02d" (len $posts) }}</small></button>
+    {{- range $t, $n := $tagCounts -}}
+      <button class="tag-bar__btn" aria-pressed="false" data-tag="{{ $t }}">{{ $t }} <small>·{{ printf "%02d" $n }}</small></button>
+    {{- end -}}
+  </div>
+
+  <div class="registry" id="registry">
+    {{- $i := 0 -}}
+    {{- $total := len $posts -}}
+    {{- range $posts -}}
+    {{- $num := printf "%03d" (sub $total $i) -}}
+    <a href="{{ .RelPermalink }}" class="reg-row" data-tags="{{ delimit .Params.tags "|" }}">
+      <div class="reg-row__id">#{{ $num }}</div>
+      <div class="reg-row__date">{{ .Date.Format "2006 · 01" }}</div>
+      <div class="reg-row__title">
+        {{ .Title }}
+        {{ with .Description }}<small>{{ . }}</small>{{ end }}
+      </div>
+      <div class="reg-row__tags">
+        {{- range first 2 .Params.tags -}}<span class="tag">{{ . }}</span>{{- end -}}
+      </div>
+      <div class="reg-row__read">{{ .ReadingTime }} min →</div>
+    </a>
+    {{- $i = add $i 1 -}}
+    {{- end -}}
+  </div>
+</section>
+<script>
+(function(){
+  var bar = document.getElementById('tagBar');
+  var rows = document.querySelectorAll('#registry .reg-row');
+  if (!bar) return;
+  bar.addEventListener('click', function(e){
+    var btn = e.target.closest('.tag-bar__btn');
+    if (!btn) return;
+    bar.querySelectorAll('.tag-bar__btn').forEach(function(b){ b.setAttribute('aria-pressed','false'); });
+    btn.setAttribute('aria-pressed','true');
+    var t = btn.dataset.tag;
+    rows.forEach(function(r){
+      var tags = (r.dataset.tags || '').split('|');
+      r.style.display = (t === '__all' || tags.indexOf(t) !== -1) ? '' : 'none';
+    });
+  });
+})();
+</script>
+{{ end }}

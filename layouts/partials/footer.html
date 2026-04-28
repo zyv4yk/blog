@@ -1,0 +1,19 @@
+<footer class="foot">
+  <div class="foot__inner">
+    <div class="foot__col">
+      <span>{{ .Site.Params.author | lower }}</span>
+      <span>{{ .Site.Params.location | lower }}</span>
+      <span class="foot__sig">end of line_</span>
+    </div>
+    <div class="foot__col">
+      <span style="color: var(--ink-4)">signal</span>
+      <a href="{{ .Site.Params.github }}" target="_blank" rel="noreferrer">github →</a>
+      <a href="{{ .Site.Params.linkedin }}" target="_blank" rel="noreferrer">linkedin →</a>
+    </div>
+    <div class="foot__col">
+      <span style="color: var(--ink-4)">build</span>
+      <span>blcknb.tech · v{{ now.Format "2006.01" }}</span>
+      <span>hugo · github actions</span>
+    </div>
+  </div>
+</footer>

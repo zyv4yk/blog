@@ -1,0 +1,31 @@
+{{ define "main" }}
+<section class="container">
+  <div class="page-head" style="margin-bottom: 0; border-bottom: none; padding-bottom: 0;">
+    <div class="page-head__id">// /content/about &nbsp;·&nbsp; dossier</div>
+  </div>
+  <div class="cv-head">
+    <div>
+      {{ $parts := split (.Site.Params.author | lower) " " }}
+      <h1 class="cv-head__name">{{ index $parts 0 }}<br/><span class="em">{{ index $parts 1 }}_</span></h1>
+      <div class="cv-head__role">{{ .Site.Params.role | lower }} · betterme</div>
+      <p class="cv-head__bio">
+        Engineer with a PHP background (Symfony, Laravel, Yii) who evolved into Platform Engineering and Go.
+        I build and maintain centralised CI/CD platforms, manage Kubernetes via Helm and Istio, and work on
+        supply-chain security and compliance. Active speaker — most recent talk: <em>"Observability as Code"</em>.
+      </p>
+    </div>
+    <div class="cv-card">
+      <div class="cv-card__row"><span class="k">subject</span><span class="v">{{ .Site.Params.author | lower }}</span></div>
+      <div class="cv-card__row"><span class="k">class</span><span class="v"><span class="cy">staff · platform</span></span></div>
+      <div class="cv-card__row"><span class="k">node</span><span class="v">{{ .Site.Params.location | lower }} · hybrid</span></div>
+      <div class="cv-card__row"><span class="k">cycle</span><span class="v">8.0 yr in service</span></div>
+      <div class="cv-card__row"><span class="k">status</span><span class="v"><span class="dot"></span>heads-down · not on the market</span></div>
+      <div class="cv-card__row"><span class="k">signal</span><span class="v"><a href="{{ .Site.Params.github }}" target="_blank" rel="noreferrer" class="cy">github ↗</a> · <a href="{{ .Site.Params.linkedin }}" target="_blank" rel="noreferrer" class="cy">linkedin ↗</a></span></div>
+    </div>
+  </div>
+
+  <div class="cv-body">
+    {{ .Content }}
+  </div>
+</section>
+{{ end }}

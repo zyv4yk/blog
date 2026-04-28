@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="{{ .Site.LanguageCode }}" data-intensity="subtle" data-hue="cyan" data-motion="on">
+{{- partial "head.html" . -}}
+<body>
+  <div class="bg-field" aria-hidden="true"></div>
+  <div class="cursor-light" id="cursorLight" aria-hidden="true"></div>
+  {{ partial "boot.html" . }}
+  <div class="shell">
+    {{ partial "nav.html" . }}
+    <main>
+      {{ block "main" . }}{{ end }}
+    </main>
+    {{ partial "footer.html" . }}
+  </div>
+
+<script>
+(function(){
+  // cursor light
+  var cl = document.getElementById('cursorLight');
+  if (cl) {
+    var raf;
+    window.addEventListener('mousemove', function(e){
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(function(){
+        cl.style.left = e.clientX + 'px';
+        cl.style.top = e.clientY + 'px';
+        cl.classList.add('is-on');
+      });
+    });
+    window.addEventListener('mouseleave', function(){ cl.classList.remove('is-on'); });
+  }
+})();
+</script>
+</body>
+</html>
