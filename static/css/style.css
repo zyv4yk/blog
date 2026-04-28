@@ -76,7 +76,7 @@
 
 /* ── reset ─────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { background: var(--bg); color: var(--ink-2); }
+html, body { background: var(--bg); color: var(--ink-2); overflow-x: hidden; }
 body {
   font-family: var(--body);
   font-size: 15px;
@@ -86,7 +86,7 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   min-height: 100vh;
-  overflow-x: hidden;
+  max-width: 100vw;
   position: relative;
 }
 
@@ -965,4 +965,41 @@ a:hover { color: var(--ink); }
   .dossier__half + .dossier__half { border-left: none; border-top: 1px solid var(--edge); }
   .cv-head { grid-template-columns: 1fr; gap: 28px; }
   .skill-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  :root { --gutter: 16px; }
+  .nav__inner { height: 56px; padding: 0 var(--gutter); }
+  .brand { font-size: 15px; letter-spacing: 0.14em; }
+  .nav__link { padding: 6px 8px; font-size: 11px; letter-spacing: 0.08em; }
+  .hero { padding: 56px 0 72px; }
+  .hero__id { gap: 12px; flex-wrap: wrap; }
+  .hero__name { font-size: clamp(44px, 13vw, 72px); }
+  .hero__bio { font-size: 15px; }
+  .idcard { grid-template-columns: 1fr; }
+  .idcard__cell { border-right: none; border-bottom: 1px solid var(--edge); }
+  .idcard__cell:last-child { border-bottom: none; }
+  .home-posts { padding: 56px 0 0; }
+  .post-row { grid-template-columns: 1fr; gap: 4px; padding: 18px 0; }
+  .post-row__num { display: none; }
+  .post-row__title { font-size: 18px; }
+  .reg-row { grid-template-columns: 1fr 56px; gap: 12px; padding: 18px 8px; }
+  .reg-row__id { display: none; }
+  .reg-row__title { font-size: 18px; }
+  .page-head { padding: 40px 0 28px; margin-bottom: 28px; }
+  .page-head__title { font-size: clamp(36px, 12vw, 56px); }
+  .registry-meta { gap: 16px; flex-wrap: wrap; font-size: 10px; }
+  .tag-bar { padding: 12px 0 24px; gap: 6px; }
+  .dossier { margin-top: 56px; }
+  .dossier__half { padding: 24px 22px; }
+  .dossier__quote { font-size: 22px; }
+  .cv-head { padding-top: 40px; }
+  .cv-head__name { font-size: clamp(44px, 13vw, 72px); }
+  .cv-card__row { grid-template-columns: 72px 1fr; gap: 10px; }
+  .cv-section { margin-top: 56px; }
+  .lang { min-width: 100%; }
+  .post-shell { padding: 40px 0 16px; }
+  .post-h1 { font-size: clamp(28px, 7vw, 40px); }
+  .post-lede { font-size: 17px; }
+  .foot { margin-top: 64px; padding: 32px var(--gutter) 40px; }
 }
