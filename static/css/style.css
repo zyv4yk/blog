@@ -460,6 +460,10 @@ a:hover { color: var(--ink); }
 .btn--cy:hover { color: var(--ink); border-color: var(--cy); box-shadow: 0 0 24px -4px var(--cy), inset 0 0 16px var(--cy-faint); }
 .btn .arr { transition: transform var(--t-fast) var(--ease); }
 .btn:hover .arr { transform: translateX(3px); }
+.btn--icon { padding: 10px 14px; }
+.btn--icon svg { display: block; }
+.nav__link--icon { display: inline-flex; align-items: center; padding: 6px 12px; }
+.nav__link--icon svg { display: block; }
 
 /* identity card */
 .idcard {
