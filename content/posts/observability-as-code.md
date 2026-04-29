@@ -7,6 +7,8 @@ tags: ["Observability", "OpenTelemetry", "Alerting", "Terraform", "Platform Engi
 
 A few weeks ago I gave a talk called **"Observability as Code: See It, Trace It, Fix It"** at our Backend Meetup at BetterMe. This post is a written version for anyone who couldn't make it — or just prefers reading over slides.
 
+> 📺 Prefer to watch? Full talk recording on YouTube: [Observability as Code: See It, Trace It, Fix It](https://youtu.be/eCPFoH8Z4Ak?si=Q5KL6fPlsz0_fvi4)
+
 ## Monitoring vs. Observability
 
 The talk started with a distinction that sounds obvious but gets blurred in practice. **Monitoring** tells you when something is broken. **Observability** tells you _why_ — it lets you see relationships between services, identify root causes, understand how technical failures impact business metrics, and make complex systems predictable.
