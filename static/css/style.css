@@ -973,9 +973,16 @@ a:hover { color: var(--ink); }
 
 @media (max-width: 480px) {
   :root { --gutter: 16px; }
-  .nav__inner { height: 56px; padding: 0 var(--gutter); }
+  .nav__inner {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 12px var(--gutter);
+    gap: 10px;
+  }
   .brand { font-size: 15px; letter-spacing: 0.14em; }
-  .nav__link { padding: 6px 8px; font-size: 11px; letter-spacing: 0.08em; }
+  .nav__links { gap: 2px; flex-wrap: wrap; justify-content: center; }
+  .nav__link { padding: 6px 10px; font-size: 11px; letter-spacing: 0.08em; }
   .hero { padding: 56px 0 72px; }
   .hero__id { gap: 12px; flex-wrap: wrap; }
   .hero__name { font-size: clamp(44px, 13vw, 72px); }
