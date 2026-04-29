@@ -8,6 +8,7 @@
 {{- $ogTitle := cond .IsHome (printf "%s — blcknb.tech" .Site.Title) (printf "%s · %s" .Title .Site.Title) -}}
 {{- $ogDesc := cond (ne .Description "") .Description .Site.Params.description -}}
 {{- $ogImage := "my-photo.jpg" | absURL -}}
+<link rel="icon" href="{{ "favicon.svg" | absURL }}" type="image/svg+xml" />
 <link rel="canonical" href="{{ .Permalink }}" />
 <meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}" />
 <meta property="og:site_name" content="{{ .Site.Title }}" />
