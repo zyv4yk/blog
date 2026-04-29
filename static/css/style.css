@@ -174,17 +174,11 @@ a:hover { color: var(--ink); }
 }
 .brand:hover { color: var(--cy); }
 .brand__mark {
-  width: 22px; height: 22px;
-  border: 1px solid var(--cy);
-  position: relative;
-  box-shadow: 0 0 8px var(--cy-glow), inset 0 0 6px var(--cy-glow);
+  width: 24px; height: 24px;
+  color: var(--cy);
+  filter: drop-shadow(0 0 4px var(--cy-glow));
+  display: block;
 }
-.brand__mark::before, .brand__mark::after {
-  content: ''; position: absolute; background: var(--cy);
-  box-shadow: 0 0 6px var(--cy);
-}
-.brand__mark::before { left: 50%; top: 2px; bottom: 2px; width: 1px; transform: translateX(-50%); }
-.brand__mark::after  { top: 50%; left: 2px; right: 2px; height: 1px; transform: translateY(-50%); }
 
 .nav__links { display: flex; gap: 4px; list-style: none; align-items: center; }
 .nav__link {
