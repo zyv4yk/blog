@@ -36,4 +36,50 @@
     document.documentElement.dataset.motion = t.motion;
   } catch(e) {}
 </script>
+{{- if .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": {{ .Site.Params.author | jsonify | safeJS }},
+  "url": {{ .Site.BaseURL | jsonify | safeJS }},
+  "image": {{ "my-photo.jpg" | absURL | jsonify | safeJS }},
+  "jobTitle": {{ .Site.Params.role | jsonify | safeJS }},
+  "description": {{ .Site.Params.description | jsonify | safeJS }},
+  "sameAs": [
+    {{ .Site.Params.github | jsonify | safeJS }},
+    {{ .Site.Params.linkedin | jsonify | safeJS }}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ .Site.Title | jsonify | safeJS }},
+  "url": {{ .Site.BaseURL | jsonify | safeJS }},
+  "description": {{ .Site.Params.description | jsonify | safeJS }}
+}
+</script>
+{{- else if and (eq .Section "posts") .IsPage }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ .Title | jsonify | safeJS }},
+  "description": {{ .Description | jsonify | safeJS }},
+  "datePublished": "{{ .Date.Format "2006-01-02" }}",
+  "dateModified": "{{ .Lastmod.Format "2006-01-02" }}",
+  "author": {
+    "@type": "Person",
+    "name": {{ .Site.Params.author | jsonify | safeJS }},
+    "url": {{ "about/" | absURL | jsonify | safeJS }}
+  },
+  "image": {{ "my-photo.jpg" | absURL | jsonify | safeJS }},
+  "url": {{ .Permalink | jsonify | safeJS }},
+  "mainEntityOfPage": {{ .Permalink | jsonify | safeJS }},
+  "keywords": {{ .Params.tags | jsonify | safeJS }}
+}
+</script>
+{{- end }}
 </head>

@@ -1,6 +1,7 @@
 baseURL = "https://blcknb.tech/"
 languageCode = "en"
 title = "Nikita Bolotov"
+enableRobotsTXT = true
 
 [params]
   description = "Staff Backend Engineer writing about Platform Engineering, CI/CD, Kubernetes, and Developer Experience."
