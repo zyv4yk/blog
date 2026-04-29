@@ -30,6 +30,33 @@ jobs:
 
 One reference in your service repo, and you get the full deploy pipeline — build, scan, push, helm upgrade, health check, rollback on failure.
 
+On the platform side, `org/platform/.github/workflows/deploy.yml` declares its inputs and the steps every service shares:
+
+```yaml
+on:
+  workflow_call:
+    inputs:
+      service-name:  { required: true, type: string }
+      environment:   { required: true, type: string }
+    secrets:
+      REGISTRY_TOKEN: { required: true }
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@<commit-sha>
+      - name: Build, scan, push
+        run: ./platform/build.sh ${{ inputs.service-name }}
+      - name: Helm upgrade
+        run: |
+          helm upgrade ${{ inputs.service-name }} ./chart \
+            --install --atomic --wait --timeout 5m \
+            --set image.tag=${{ github.sha }}
+```
+
+`--atomic --wait --timeout 5m` is the whole rollback story: if pods don't go healthy in time, Helm rolls back automatically and the workflow fails loudly. No manual intervention.
+
 ## Helm Governance
 
 Standardizing Helm charts with a governance model is critical:
@@ -39,7 +66,20 @@ Standardizing Helm charts with a governance model is critical:
 - **Validation** — `helm template` runs in CI before any deploy
 - **Rollback safety** — automatic rollback if health checks fail post-deploy
 
-The tricky part is subchart value scoping — if your base chart uses nested subcharts, values don't automatically propagate. Using `global.*` keys solves this but requires careful documentation.
+The tricky part is subchart value scoping — if your base chart uses nested subcharts, values don't automatically propagate. Using `global.*` keys solves this but requires careful documentation:
+
+```yaml
+# base chart values.yaml
+global:
+  environment: production
+  observability:
+    enabled: true
+
+redis:           # subchart — won't see parent's `environment`
+  # template uses {{ .Values.global.environment }} explicitly
+```
+
+Without `global.*`, every subchart re-declares its own copy of `environment`, `region`, `tracing`, etc. — and they drift the moment someone forgets to update one of them.
 
 ## Supply Chain Security Basics
 
@@ -60,3 +100,8 @@ The hardest part isn't the technical implementation — it's **adoption**:
 4. **Measure impact** — DORA metrics give objective proof the platform is working
 
 Building a CI/CD platform is building a product. Your developers are your users. Treat it accordingly.
+
+## Related reading
+
+- [Supply Chain Security in Practice](/posts/supply-chain-security/) — the "supply chain basics" section above, expanded into a working playbook
+- [Observability as Code](/posts/observability-as-code/) — DORA metrics and alerts-as-code in detail

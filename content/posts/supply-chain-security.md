@@ -62,7 +62,20 @@ Every third-party GitHub Action should be pinned to an exact commit SHA, not a m
 - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
 ```
 
-More verbose, but it means a compromised action repository can't inject code into your pipelines. Tools like [zizmor](https://github.com/woodruffw/zizmor) can audit your workflows for unpinned actions automatically.
+More verbose, but it means a compromised action repository can't inject code into your pipelines. Tools like [zizmor](https://github.com/woodruffw/zizmor) can audit your workflows for unpinned actions automatically:
+
+```text
+$ zizmor .github/workflows/
+warning[unpinned-uses]: action is not pinned to a hash
+   --> deploy.yml:23:9
+    |
+ 23 |     - uses: actions/checkout@v4
+    |             ^^^^^^^^^^^^^^^^^^^ pin to a specific commit SHA
+
+2 findings (1 warning, 1 note) across 1 file.
+```
+
+Wire it into pre-commit or CI and unpinned actions never make it past review.
 
 ## Making Compliance Practical
 
@@ -84,3 +97,8 @@ You don't need a perfect supply chain security setup on day one. Start with:
 3. SHA pinning for actions (prevents supply chain attacks)
 
 Then layer on SLSA provenance, formal secrets management, and compliance documentation as your needs grow. The important thing is to **start**.
+
+## Related reading
+
+- [Building a Centralized CI/CD Platform for Microservices](/posts/ci-cd-platform-at-scale/) — where to wire all this in
+- [Observability as Code](/posts/observability-as-code/) — same pipeline, alerting and tracing
