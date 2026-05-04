@@ -23,10 +23,11 @@
 <meta name="twitter:title" content="{{ $ogTitle }}" />
 <meta name="twitter:description" content="{{ $ogDesc }}" />
 <meta name="twitter:image" content="{{ $ogImage }}" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="{{ "css/style.css" | relURL }}" />
+<link rel="preload" href="{{ "fonts/Rajdhani-300-latin.woff2" | relURL }}" as="font" type="font/woff2" crossorigin />
+{{- $fonts := resources.Get "css/fonts.css" -}}
+{{- $style := resources.Get "css/style.css" -}}
+{{- $css := slice $fonts $style | resources.Concat "css/site.css" | resources.Minify -}}
+<style>{{ $css.Content | safeCSS }}</style>
 {{- /* Mermaid: load only on pages that opt in via frontmatter (mermaid: true).
        Render hook at layouts/_default/_markup/render-codeblock-mermaid.html
        converts ```mermaid fences into <pre class="mermaid"> elements. */ -}}
