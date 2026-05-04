@@ -27,6 +27,24 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="{{ "css/style.css" | relURL }}" />
+{{- /* Mermaid: load only on pages that opt in via frontmatter (mermaid: true).
+       Render hook at layouts/_default/_markup/render-codeblock-mermaid.html
+       converts ```mermaid fences into <pre class="mermaid"> elements. */ -}}
+{{- if and .IsPage .Params.mermaid }}
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    themeVariables: {
+      fontFamily: 'JetBrains Mono, monospace',
+      fontSize: '14px'
+    },
+    securityLevel: 'loose',
+    flowchart: { htmlLabels: true, curve: 'basis' }
+  });
+</script>
+{{- end }}
 <script>
   try {
     var saved = JSON.parse(localStorage.getItem('nbTweaks') || 'null');

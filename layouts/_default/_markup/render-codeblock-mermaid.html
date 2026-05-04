@@ -1,0 +1,9 @@
+{{- /*
+  Render hook for ```mermaid fenced code blocks.
+  Mermaid (loaded conditionally in head.html when frontmatter `mermaid: true`)
+  scans the DOM on load and renders any element with class="mermaid".
+*/ -}}
+<pre class="mermaid">
+{{- .Inner | safeHTML }}
+</pre>
+{{- /* prevent trailing newline that breaks rendering on some browsers */ -}}
