@@ -13,5 +13,4 @@ Thumbs.db
 *.swp
 *.swo
 
-# Local planning artifacts (specs, plans) — kept out of git per user preference
-docs/
+draft/
