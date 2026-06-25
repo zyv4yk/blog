@@ -754,6 +754,51 @@ a:hover { color: var(--ink); }
   box-shadow: 0 0 24px -8px var(--cy-glow) inset;
 }
 
+/* tables — wrapped in .table-scroll by render-table.html */
+.post-body .table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--edge);
+  border-left: 2px solid var(--cy);
+  border-radius: 0 var(--r) var(--r) 0;
+  background: var(--panel);
+  box-shadow: 0 0 24px -8px var(--cy-glow) inset;
+  -webkit-overflow-scrolling: touch;
+}
+.post-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.post-body thead th {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cy);
+  text-align: left;
+  vertical-align: bottom;
+  padding: 12px 18px;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--edge);
+  background: var(--panel-2);
+}
+.post-body tbody td {
+  padding: 12px 18px;
+  color: var(--ink-2);
+  vertical-align: top;
+  border-bottom: 1px solid var(--edge-soft);
+}
+.post-body tbody tr:last-child td { border-bottom: none; }
+.post-body tbody tr { transition: background var(--t-fast) var(--ease); }
+.post-body tbody tr:hover { background: var(--cy-faint); }
+.post-body tbody td:first-child { color: var(--ink); font-weight: 500; }
+.post-body table code { font-size: 0.85em; }
+.post-body .trend { font-weight: 700; font-family: var(--mono); }
+.post-body .trend-good { color: var(--good); }
+.post-body .trend-bad  { color: var(--bad); }
+
 /* progress rail */
 .progress-rail {
   position: fixed; left: 24px; top: 50%; transform: translateY(-50%);

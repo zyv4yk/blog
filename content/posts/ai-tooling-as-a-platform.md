@@ -137,8 +137,8 @@ Impact is the harder number, and the one that matters. The clearest signal came 
 
 | Metric                    | Direction        |
 |---------------------------|------------------|
-| Mean time to merge        | ↓ roughly half   |
-| Share merged within a day | ↑ several points |
+| Mean time to merge        | <span class="trend trend-good">↓</span> roughly half   |
+| Share merged within a day | <span class="trend trend-good">↑</span> several points |
 | Review coverage           | majority of PRs  |
 
 The cut in time-to-merge isn't really the model being clever. The boring routine comments just show up in seconds instead of waiting a day for someone to get to the PR, and people got to spend their review time on the parts that actually needed judgment.
