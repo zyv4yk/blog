@@ -1,6 +1,6 @@
 ---
 title: "Observability as Code: My Backend Meetup Talk, Now in Writing"
-date: 2024-11-11
+date: 2025-11-11
 description: "A written adaptation of my Backend Meetup talk on observability in microservices — from the three pillars and OpenTelemetry to Terraform-managed alerts and on-call workflows."
 tags: ["Observability", "OpenTelemetry", "Alerting", "Terraform", "Platform Engineering", "Meetup"]
 ---
