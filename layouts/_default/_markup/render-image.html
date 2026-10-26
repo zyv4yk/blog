@@ -1,0 +1,13 @@
+{{- /*
+  Render hook for Markdown images.
+  Wraps every image in a <figure> so posts get a framed screenshot with a
+  caption: the title (the quoted text after the URL) is the caption, and the
+  alt text stays on the <img> for screen readers. style.css targets
+  .post-figure.
+*/ -}}
+<figure class="post-figure">
+  <img src="{{ .Destination | safeURL }}" alt="{{ .PlainText }}" loading="lazy" decoding="async">
+  {{- with .Title }}
+  <figcaption>{{ . }}</figcaption>
+  {{- end }}
+</figure>

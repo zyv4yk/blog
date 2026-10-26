@@ -754,6 +754,31 @@ a:hover { color: var(--ink); }
   box-shadow: 0 0 24px -8px var(--cy-glow) inset;
 }
 
+/* figures — every Markdown image is wrapped by render-image.html */
+.post-body .post-figure {
+  margin: 1.6em 0;
+  border: 1px solid var(--edge);
+  border-left: 2px solid var(--cy);
+  border-radius: 0 var(--r) var(--r) 0;
+  background: var(--panel);
+  box-shadow: 0 0 24px -8px var(--cy-glow) inset;
+  overflow: hidden;
+}
+.post-body .post-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.post-body .post-figure figcaption {
+  padding: 10px 18px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--ink-4);
+  border-top: 1px solid var(--edge-soft);
+  background: var(--panel-2);
+}
+
 /* tables — wrapped in .table-scroll by render-table.html */
 .post-body .table-scroll {
   overflow-x: auto;
