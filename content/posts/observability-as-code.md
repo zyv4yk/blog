@@ -16,6 +16,10 @@ A few weeks ago I gave a talk called **"Observability as Code: See It, Trace It,
 
 > 📺 Prefer to watch? Full talk recording on YouTube: [Observability as Code: See It, Trace It, Fix It](https://youtu.be/eCPFoH8Z4Ak?si=Q5KL6fPlsz0_fvi4)
 
+<div class="video-embed">
+<iframe src="https://www.youtube-nocookie.com/embed/eCPFoH8Z4Ak" title="Observability as Code: See It, Trace It, Fix It" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
 > 📰 Also on DOU, in Ukrainian: [Дашборди зелені, checkout зламаний: як Observability as Code веде від alert до root cause](https://dou.ua/forums/topic/62296/)
 
 ## Monitoring vs. Observability
