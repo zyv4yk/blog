@@ -10,7 +10,7 @@
   <div class="post-meta-row">
     <span class="cy">{{ .Title | truncate 1 "" }}</span>
     <span class="sep">|</span>
-    <span>{{ .Date.Format "2006 · 01 · 02" }}</span>
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006 · 01 · 02" }}</time>
     <span class="sep">|</span>
     <span>{{ .ReadingTime }} min read</span>
     <span class="sep">|</span>
@@ -28,6 +28,30 @@
   <div class="post-body">
     {{ .Content }}
   </div>
+
+  {{- /* Internal linking: posts sharing tags first, otherwise the latest other posts */ -}}
+  {{- $posts := where .Site.RegularPages "Section" "posts" -}}
+  {{- $related := first 3 ($posts.Related .) -}}
+  {{- if not $related }}{{ $related = first 3 (where $posts "Permalink" "ne" .Permalink) }}{{ end -}}
+  {{- with $related }}
+  <nav class="post-related" aria-label="Related posts">
+    <h2 class="section-title" data-id="→">keep reading</h2>
+    <div class="home-posts__list">
+      {{- range . }}
+      <a href="{{ .RelPermalink }}" class="post-row">
+        <div class="post-row__date">{{ .Date.Format "2006 · 01" }}</div>
+        <div class="post-row__title">
+          {{ .Title }}
+          {{ with .Description }}<small>{{ . }}</small>{{ end }}
+        </div>
+        <div class="post-row__tags">
+          {{- range first 2 .Params.tags -}}<span class="tag tag--cy">{{ . }}</span>{{- end -}}
+        </div>
+      </a>
+      {{- end }}
+    </div>
+  </nav>
+  {{- end }}
 
   <div class="post-end">
     <span><span class="cy">end of file_</span> · {{ .Title | truncate 40 }}</span>

@@ -1,7 +1,7 @@
 ---
 title: 'The Agent Says "Done". The Telemetry Has Questions'
 date: 2026-10-26
-description: "An AI agent can return 200 OK and still fail the task. A generalized approach to observing agents with OpenTelemetry, the GenAI semantic conventions and Elastic APM: one trace across the service and the agent, tokens and cost, dashboards, evals, and the traps that make panels lie."
+description: "An AI agent can return 200 OK and still fail the task. How to observe agents with OpenTelemetry GenAI conventions and Elastic APM: traces, token cost, evals."
 tags: ["Observability", "AI Tooling", "Agents", "OpenTelemetry", "Elastic APM", "Evals", "Platform Engineering"]
 draft: false
 ---

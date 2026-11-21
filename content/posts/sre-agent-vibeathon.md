@@ -1,7 +1,7 @@
 ---
 title: "An SRE Agent in Two Days: What Our Vibeathon Was Really Like"
 date: 2026-09-07
-description: "Artem Chernenko and I joined the AI Agents.PRO vibeathon with a rough idea for an SRE agent. A coding agent gave us a working system quickly. The real work was turning that first draft into something we could test, explain, and trust."
+description: "How two engineers built an SRE agent in a two-day vibeathon with a coding agent, and the real work of making that first draft testable and trustworthy."
 tags: ["AI Tooling", "Agents", "SRE", "Evals", "Claude Code"]
 draft: false
 ---

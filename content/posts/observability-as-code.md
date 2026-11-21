@@ -1,13 +1,22 @@
 ---
 title: "Observability as Code: My Backend Meetup Talk, Now in Writing"
 date: 2025-11-11
-description: "A written adaptation of my Backend Meetup talk on observability in microservices — from the three pillars and OpenTelemetry to Terraform-managed alerts and on-call workflows."
+description: "Written version of my Backend Meetup talk: the three pillars, OpenTelemetry, Terraform-managed alerts and on-call workflows for microservices."
+seo_title: "Observability as Code: OpenTelemetry, Terraform Alerts, On-Call"
+video:
+  id: "eCPFoH8Z4Ak"
+  name: "Observability as Code: See It, Trace It, Fix It"
+  description: "Backend Meetup talk on observability in microservices: the three pillars, OpenTelemetry, Terraform-managed alerts and on-call workflows."
+  uploadDate: "2026-01-20T05:43:02-08:00"
+  duration: "PT24M49S"
 tags: ["Observability", "OpenTelemetry", "Alerting", "Terraform", "Platform Engineering", "Meetup"]
 ---
 
 A few weeks ago I gave a talk called **"Observability as Code: See It, Trace It, Fix It"** at our Backend Meetup at BetterMe. This post is a written version for anyone who couldn't make it — or just prefers reading over slides.
 
 > 📺 Prefer to watch? Full talk recording on YouTube: [Observability as Code: See It, Trace It, Fix It](https://youtu.be/eCPFoH8Z4Ak?si=Q5KL6fPlsz0_fvi4)
+
+> 📰 Also on DOU, in Ukrainian: [Дашборди зелені, checkout зламаний: як Observability as Code веде від alert до root cause](https://dou.ua/forums/topic/62296/)
 
 ## Monitoring vs. Observability
 

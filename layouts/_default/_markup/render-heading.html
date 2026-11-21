@@ -1,0 +1,2 @@
+{{- /* Headings get a hover-visible "#" anchor so sections can be linked directly. */ -}}
+<h{{ .Level }} id="{{ .Anchor | safeURL }}">{{ .Text | safeHTML }}<a class="heading-anchor" href="#{{ .Anchor | safeURL }}" aria-label="Link to this section">#</a></h{{ .Level }}>

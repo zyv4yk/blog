@@ -2,6 +2,7 @@
 title: "Supply Chain Security in Practice: From Container Scanning to Compliance"
 date: 2025-06-20
 description: "A practical guide to securing your CI/CD pipeline: container vulnerability scanning, secrets management, SHA pinning, and preparing for compliance audits."
+seo_title: "CI/CD Supply Chain Security: Scanning, Secrets, SHA Pinning"
 tags: ["Security", "Compliance", "Secrets Management", "OIDC"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Treating AI Coding Tools Like a Platform Product"
 date: 2026-06-05
-description: "Notes on shipping AI assistant skills, agents, hooks, and MCP context as a versioned platform instead of letting everyone run their own prompts. With evals and a couple of numbers that actually moved."
+description: "How to ship AI assistant skills, agents, hooks and MCP context as a versioned platform instead of ad-hoc prompts, with evals and numbers that actually moved."
 tags: ["AI Tooling", "Claude Code", "MCP", "Developer Experience", "Platform Engineering", "Code Review"]
 draft: false
 ---
