@@ -852,6 +852,11 @@ a:hover { color: var(--ink); }
 }
 .post-end .cy { color: var(--cy); }
 
+/* related posts (internal linking) at the end of a post */
+.post-related { margin-top: 72px; }
+.post-related .post-row { grid-template-columns: 110px 1fr auto; }
+@media (max-width: 880px) { .post-related .post-row { grid-template-columns: 1fr; gap: 4px; } }
+
 /* ═══════════════════════════════════════════════════════════════════
    CV — system dossier
    ═══════════════════════════════════════════════════════════════════ */
@@ -1079,3 +1084,13 @@ a:hover { color: var(--ink); }
   .post-lede { font-size: 17px; }
   .foot { margin-top: 64px; padding: 32px var(--gutter) 40px; }
 }
+
+/* heading anchors in post bodies */
+.heading-anchor {
+  margin-left: 0.5em; color: var(--ink-4); text-decoration: none;
+  font-family: var(--mono); font-weight: 400;
+  opacity: 0; transition: opacity var(--t-fast) var(--ease);
+}
+:is(h1, h2, h3, h4):hover > .heading-anchor, .heading-anchor:focus-visible { opacity: 1; }
+.heading-anchor:hover { color: var(--cy); }
+@media (hover: none) { .heading-anchor { display: none; } }

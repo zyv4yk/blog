@@ -1,5 +1,7 @@
 ---
-title: "Dossier"
+title: "About"
+seo_title: "About — Staff Platform Engineer, CI/CD & Kubernetes"
+description: "Staff Platform Engineer in Kyiv: centralised CI/CD on GitHub Actions, Helm and Istio on Kubernetes, supply-chain security and observability."
 type: "about"
 layout: "single"
 ---

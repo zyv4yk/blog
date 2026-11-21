@@ -2,6 +2,12 @@ baseURL = "https://blcknb.tech/"
 languageCode = "en"
 title = "Nikita Bolotov"
 enableRobotsTXT = true
+# lastmod from git history (needs full clone in CI: fetch-depth: 0) so
+# dateModified / <lastmod> reflect real edits instead of the publish date
+enableGitInfo = true
+# /tags/* and /categories/* were rendering the full registry (duplicate content)
+# and nothing links to them: the tag filter on /posts/ is client-side only.
+disableKinds = ["taxonomy", "term"]
 
 [params]
   description = "Staff Backend Engineer writing about Platform Engineering, CI/CD, Kubernetes, and Developer Experience."
@@ -11,6 +17,45 @@ enableRobotsTXT = true
   github = "https://github.com/zyv4yk"
   linkedin = "https://www.linkedin.com/in/nikita-bolotov/"
   available = false
+  # SEO: home <title> is keyword-led; the rest of the site uses "<page> · <site>"
+  homeTitle = "Nikita Bolotov | Platform Engineer, CI/CD & Observability"
+  # default social card, 1200x630 (static/og-default.png). Posts can override
+  # with `image: "/images/..."` in front matter.
+  ogImage = "og-default.png"
+  alternateName = ["Нікіта Болотов"]
+  knowsAbout = ["Platform Engineering", "CI/CD", "GitHub Actions", "Kubernetes", "Helm", "Istio", "Observability", "OpenTelemetry", "Supply chain security", "AI tooling"]
+
+[frontmatter]
+  lastmod = ["lastmod", ":git", "date", "publishDate"]
+
+# Also expose static/images to the asset pipeline so the image render hook can
+# read real width/height (prevents layout shift). The files are still served
+# from static/ at the same URLs.
+[module]
+  [[module.mounts]]
+    source = "content"
+    target = "content"
+  [[module.mounts]]
+    source = "data"
+    target = "data"
+  [[module.mounts]]
+    source = "layouts"
+    target = "layouts"
+  [[module.mounts]]
+    source = "i18n"
+    target = "i18n"
+  [[module.mounts]]
+    source = "archetypes"
+    target = "archetypes"
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+  [[module.mounts]]
+    source = "static/images"
+    target = "assets/images"
 
 [markup]
   [markup.goldmark]
@@ -23,6 +68,20 @@ enableRobotsTXT = true
 
 [outputs]
   home = ["HTML"]
+  # RSS for the blog only (/posts/index.xml); the home feed would also list /about/
+  section = ["HTML", "RSS"]
+
+# "Related posts" block on every post, ranked by shared tags
+[related]
+  includeNewer = true
+  threshold = 50
+  toLower = true
+  [[related.indices]]
+    name = "tags"
+    weight = 100
+  [[related.indices]]
+    name = "date"
+    weight = 10
 
 [menu]
   [[menu.main]]
@@ -30,7 +89,7 @@ enableRobotsTXT = true
     url = "/"
     weight = 1
   [[menu.main]]
-    name = "Dossier"
+    name = "About"
     url = "/about/"
     weight = 2
   [[menu.main]]

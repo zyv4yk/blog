@@ -4,9 +4,17 @@
   caption: the title (the quoted text after the URL) is the caption, and the
   alt text stays on the <img> for screen readers. style.css targets
   .post-figure.
+
+  static/images is also mounted into assets/images (see hugo.toml), which lets
+  us read the real pixel size and emit width/height so the browser reserves
+  space before the image loads (no layout shift).
 */ -}}
+{{- $img := "" -}}
+{{- if hasPrefix .Destination "/images/" -}}
+  {{- $img = resources.Get (strings.TrimPrefix "/" .Destination) -}}
+{{- end -}}
 <figure class="post-figure">
-  <img src="{{ .Destination | safeURL }}" alt="{{ .PlainText }}" loading="lazy" decoding="async">
+  <img src="{{ .Destination | safeURL }}" alt="{{ .PlainText }}"{{ with $img }} width="{{ .Width }}" height="{{ .Height }}"{{ end }} loading="lazy" decoding="async">
   {{- with .Title }}
   <figcaption>{{ . }}</figcaption>
   {{- end }}
