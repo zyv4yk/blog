@@ -8,13 +8,16 @@
   static/images is also mounted into assets/images (see hugo.toml), which lets
   us read the real pixel size and emit width/height so the browser reserves
   space before the image loads (no layout shift).
+
+  alt comes from .Text (rendered HTML), not .PlainText: .PlainText drops the
+  typographer's smart quotes, so "Kibana's" became "Kibanas".
 */ -}}
 {{- $img := "" -}}
 {{- if hasPrefix .Destination "/images/" -}}
   {{- $img = resources.Get (strings.TrimPrefix "/" .Destination) -}}
 {{- end -}}
 <figure class="post-figure">
-  <img src="{{ .Destination | safeURL }}" alt="{{ .PlainText }}"{{ with $img }} width="{{ .Width }}" height="{{ .Height }}"{{ end }} loading="lazy" decoding="async">
+  <img src="{{ .Destination | safeURL }}" alt="{{ .Text | plainify | htmlUnescape }}"{{ with $img }} width="{{ .Width }}" height="{{ .Height }}"{{ end }} loading="lazy" decoding="async">
   {{- with .Title }}
   <figcaption>{{ . }}</figcaption>
   {{- end }}
